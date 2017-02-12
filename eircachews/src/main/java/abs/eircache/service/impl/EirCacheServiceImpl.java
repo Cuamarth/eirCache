@@ -2,7 +2,6 @@ package abs.eircache.service.impl;
 
 import abs.eircache.model.ResponseModel;
 import abs.eircache.service.EirCacheService;
-import abs.eircache.ws.controller.EirCodeController;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Map;
 
 
 /**

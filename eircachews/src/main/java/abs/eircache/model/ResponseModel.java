@@ -1,7 +1,6 @@
 package abs.eircache.model;
 
 
-import javassist.SerialVersionUID;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 
