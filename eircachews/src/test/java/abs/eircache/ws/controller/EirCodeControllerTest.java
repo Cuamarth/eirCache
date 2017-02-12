@@ -50,9 +50,9 @@ public class EirCodeControllerTest {
         ResponseModel responseModel=new ResponseModel("{\"addressline1\":\"Dept of Communications, Climate Change and Natural Resources\",\"addressline2\":\"29-31 Adelaide Road\"}",
                 MediaType.APPLICATION_JSON, HttpStatus.OK);
 
-        when(eirCacheService.getAPIResponseCached("/pcw/PCW45-12345-12345-1234X/address/ie/D02X285","lines=3&format=json")).thenReturn(responseModel);
+        when(eirCacheService.getAPIResponseCached("/address/ie/D02X285","lines=3&format=json")).thenReturn(responseModel);
 
-        mvc.perform(MockMvcRequestBuilders.get("/pcw/PCW45-12345-12345-1234X/address/ie/D02X285?lines=3&format=json").accept(MediaType.APPLICATION_JSON))
+        mvc.perform(MockMvcRequestBuilders.get("/address/ie/D02X285?lines=3&format=json").accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("Dept of Communications, Climate Change and Natural Resources")));
     }
