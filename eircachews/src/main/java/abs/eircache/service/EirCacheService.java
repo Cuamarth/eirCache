@@ -2,9 +2,6 @@ package abs.eircache.service;
 
 
 import abs.eircache.model.ResponseModel;
-import org.springframework.cache.annotation.Cacheable;
-
-import java.util.Map;
 
 /**
  * Service which does a call to to https://developers.alliescomputing.com/postcoder-web-api with the params supplied and returns the result
