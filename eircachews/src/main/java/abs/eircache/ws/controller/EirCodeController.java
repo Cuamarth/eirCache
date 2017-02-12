@@ -39,7 +39,7 @@ public class EirCodeController {
      * @param response
      */
     @RequestMapping({"/*", "/*/*","/*/*/*","/*/*/*/*","/*/*/*/*/*"})
-    public void  mirrorResponse(HttpServletRequest request, HttpServletResponse response ){
+    public String  mirrorResponse(HttpServletRequest request, HttpServletResponse response ){
 
 
 
@@ -47,27 +47,22 @@ public class EirCodeController {
         ResponseModel responseModel=eirCacheService.getAPIResponseCached(request.getRequestURI().toString(),request.getQueryString());
 
         if (!responseModel.getStatus().equals(HttpStatus.OK)){
-            processErrorResponse(response,responseModel.getStatus());
-            return;
+            return processErrorResponse(response,responseModel.getStatus());
+
         }
         log.info("Returning OK status  for request");
         response.setContentType(responseModel.getType().toString());
         response.setStatus(responseModel.getStatus().value());
 
-
-        try {
-            response.getWriter().write(responseModel.getResponse());
-        } catch (IOException e) {
-            log.error("Error writing content to servlet response",e);
-            processErrorResponse(response,HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return responseModel.getResponse();
     }
 
 
-    private void processErrorResponse(HttpServletResponse response,HttpStatus status){
+    private String processErrorResponse(HttpServletResponse response,HttpStatus status){
 
         response.setStatus(status.value());
         log.info("Returning "+status.value()+" status  for request");
+        return "";
 
     }
 
