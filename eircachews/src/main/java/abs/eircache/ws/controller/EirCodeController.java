@@ -20,6 +20,7 @@ import java.io.IOException;
  */
 @Api(name = "EirCodeController", description = "Methods to get petitions from https://developers.alliescomputing.com/postcoder-web-api based on cache ", group = "Main")
 @RestController
+@RequestMapping({"/address", "/addressgeo","/position","/rgeo"})
 public class EirCodeController {
 
 
