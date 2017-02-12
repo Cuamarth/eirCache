@@ -58,7 +58,7 @@ public class EirCodeController {
         try {
             response.getWriter().write(responseModel.getResponse());
         } catch (IOException e) {
-            log.error("Error writing content to servlet",e);
+            log.error("Error writing content to servlet response",e);
             processErrorResponse(response,HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
