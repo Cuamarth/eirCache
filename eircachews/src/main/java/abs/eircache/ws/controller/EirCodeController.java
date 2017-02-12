@@ -2,6 +2,8 @@ package abs.eircache.ws.controller;
 
 import abs.eircache.model.ResponseModel;
 import abs.eircache.service.EirCacheService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.jsondoc.core.annotation.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 /**
  *@author  beniteza
@@ -27,6 +28,7 @@ public class EirCodeController {
     @Autowired
     EirCacheService eirCacheService;
 
+    private Log log = LogFactory.getLog(EirCodeController.class);
 
     /**
      * Accepts up to 5 slash parameters in request and do the exact same call to external service
@@ -36,32 +38,30 @@ public class EirCodeController {
      * @param response
      */
     @RequestMapping({"/*", "/*/*","/*/*/*","/*/*/*/*","/*/*/*/*/*"})
-    public void  mirrorResponse(HttpServletRequest request, HttpServletResponse response ){
+    public String  mirrorResponse(HttpServletRequest request, HttpServletResponse response ){
 
 
 
-
-        ResponseModel responseModel=eirCacheService.getAPIResponseCached(request.getRequestURI().toString(),request.getQueryString());
+        log.info("Proccessing "+request.getRequestURI()+"?"+request.getQueryString() +" will be returned from cache if available");
+        ResponseModel responseModel=eirCacheService.getAPIResponseCached(request.getRequestURI(),request.getQueryString());
 
         if (!responseModel.getStatus().equals(HttpStatus.OK)){
-            processErrorResponse(response,responseModel.getStatus());
-        }
+            return processErrorResponse(response,responseModel.getStatus());
 
+        }
+        log.info("Returning OK status  for request");
         response.setContentType(responseModel.getType().toString());
         response.setStatus(responseModel.getStatus().value());
 
-
-        try {
-            response.getWriter().write(responseModel.getResponse());
-        } catch (IOException e) {
-            processErrorResponse(response,HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        return responseModel.getResponse();
     }
 
 
-    private void processErrorResponse(HttpServletResponse response,HttpStatus status){
+    private String processErrorResponse(HttpServletResponse response,HttpStatus status){
 
         response.setStatus(status.value());
+        log.info("Returning "+status.value()+" status  for request");
+        return "";
 
     }
 
