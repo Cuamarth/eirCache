@@ -8,8 +8,7 @@ var eirAPP =angular.module('eirAPP', [])
         function find (postCode) {
              return $http({
                        method: 'GET',
-                       url: '/address/uk/'+postCode,
-                       params: 'format=json'
+                       url: '/address/ie/'+postCode+"?lines=3&format=json"
                     });
         }
     });
