@@ -60,11 +60,17 @@
             <version>2.10.2.2.21</version>
         </dependency>
         <dependency>
+            <groupId>abs.eircache</groupId>
+            <artifactId>eircache-frontend</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <version>${spring.booot.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
 

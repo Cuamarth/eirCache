@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="eirAPP">
+<head>
+    <meta charset="UTF-8">
+    <title>EirCode checker</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="css/app.css"/>
+    <script src="js/angular.min.js"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+
+    <div class="main-content">
+
+        <div class="container">
+            <div id="pageTitle" class="row text-center">
+                <h1>Eircode search</h1>
+            </div>
+            <div id="searchForm" class="row " ng-controller="eirAPPController as eirCodeForm">
+                <div class="row text-center ">
+                    <form class="form-inline" ng-submit="eirCodeForm.sendForm()">
+                        <input type="search" name="search" placeholder="Type Eirish eircode" class="form-control" ng-model="eirCodeForm.searchText"  >
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+                <div class="row text-center">
+                    <table class="table">
+                        <thead class="thead-inverse">
+                        <tr>
+                            <th>#</th>
+                            <th>Building Name</th>
+                            <th>County</th>
+                            <th>Depend Locality</th>
+                            <th>Post Code</th>
+                            <th>Post Town</th>
+                            <th>Premise</th>
+                            <th>Street</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                         <tr ng-repeat="result in eirCodeForm.results">
+                             <th scope="row">{{$index}}	</th>
+                             <td>{{result.buildingname}}</td>
+                             <td>{{result.county}}</td>
+                             <td>{{result.dependentlocality}}</td>
+                             <td>{{result.postcode}}</td>
+                             <td>{{result.posttown}}</td>
+                             <td>{{result.premise}}</td>
+                             <td>{{result.street}}</td>
+                        </tr>
+                        <tr  ng-show="eirCodeForm.noResults" class="ng-hide">
+                            <td colspan="8"> {{eirCodeForm.noResultsText}} </td>
+                        </tr>
+
+                        </tbody>
+                    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>
