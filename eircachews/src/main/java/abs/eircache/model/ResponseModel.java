@@ -19,17 +19,19 @@ public class ResponseModel  implements Serializable{
 
     HttpStatus status;
 
-    private long SerialVersionUID = 12456L;
+    static final long serialVersionUUID = 12456L;
 
 
-    public ResponseModel(){};
+    public ResponseModel(){
+
+    }
 
     public ResponseModel(String response, MediaType type, HttpStatus status){
 
         this.response=response;
         this.type=type;
         this.status=status;
-    };
+    }
 
 
 

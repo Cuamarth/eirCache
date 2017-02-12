@@ -42,8 +42,8 @@ public class EirCodeController {
 
 
 
-        log.info("Proccessing "+request.getRequestURI().toString()+"?"+request.getQueryString() +" will be returned from cache if available");
-        ResponseModel responseModel=eirCacheService.getAPIResponseCached(request.getRequestURI().toString(),request.getQueryString());
+        log.info("Proccessing "+request.getRequestURI()+"?"+request.getQueryString() +" will be returned from cache if available");
+        ResponseModel responseModel=eirCacheService.getAPIResponseCached(request.getRequestURI(),request.getQueryString());
 
         if (!responseModel.getStatus().equals(HttpStatus.OK)){
             return processErrorResponse(response,responseModel.getStatus());
